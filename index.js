@@ -69,7 +69,7 @@ sumOfTwoNumberInTypeScript(5, 6); // 11
 // sumOfTwoNumberInTypeScript(10) // non accetta un'invocazione con un solo argomento
 // TYPE UNION
 var stringOrNumber = 'stefano';
-var stringOrNumber2 = 100;
+var stringOrNumber2 = 101;
 var stringOrNumber3 = 'ciao';
 var daniele;
 console.log(daniele); // undefined
@@ -133,6 +133,7 @@ var pet1 = {
     breed: 'Labrador',
     age: 5,
     skills: ['barking', 'playing', 'sleeping'],
+    numberOfPaws: 4,
 };
 // se volessi riutilizzare la struttura di pet1 per creare altri pets "in serie"?
 var pet2 = {
@@ -140,5 +141,77 @@ var pet2 = {
     breed: 'European',
     age: 7,
     skills: ['asking-for-food', 'playing', 'destroying', 'judging'],
-    // numberOfPaws: 4
+    numberOfPaws: 4,
 };
+var pet3 = {
+    species: 'Snake',
+    breed: 'Copperhead',
+    age: 1,
+    skills: ['crawls', 'eat', 'sleep'],
+};
+var mario = {
+    name: 'Mario Mario',
+    age: 30,
+    height: 170,
+    eyeColor: 'brown',
+    hairColor: 'brown',
+};
+var luigi = {
+    name: 'Luigi Mario',
+    age: 30,
+    height: 175,
+    eyeColor: 'brown',
+    hairColor: 'brown',
+    favoriteHand: 'left',
+    favoriteCourt: 'grass',
+    championshipsWon: 0,
+};
+var bowser = {
+    name: 'Bowser Koopa',
+    age: 35,
+    height: 185,
+    eyeColor: 'brown',
+    hairColor: 'brown',
+    favoriteHand: 'right',
+    favoriteCourt: 'clay',
+    championshipsWon: 10,
+};
+var yoshi = {
+    name: 'Yoshi',
+    age: 25,
+    height: 175,
+    eyeColor: 'brown',
+    hairColor: 'brown',
+    favoriteHand: 'right',
+    favoriteCourt: 'grass',
+    championshipsWon: 3,
+};
+var tennisPlayers = [];
+// const tennisPlayers: TennisPlayer[] = []
+tennisPlayers.push(luigi, bowser, yoshi);
+console.log('TENNISPLAYERS', tennisPlayers);
+tennisPlayers.forEach(function (player) {
+    console.log(player.favoriteHand.length.toPrecision(2));
+});
+var arrayOfTennisPlayersNames = tennisPlayers.map(function (player) {
+    return player.name;
+});
+var italianAddress = {
+    street: 'Via Roma',
+    civicNumber: 1,
+    city: 'Paperino',
+    zipCode: '59100',
+    area: 'Italy',
+};
+italianAddress.area.toUpperCase();
+var americanAddress = {
+    street: 'E Hills Dr',
+    civicNumber: 2711,
+    city: 'Moore',
+    zipCode: '73160',
+    area: {
+        state: 'Oklahoma',
+        country: 'USA',
+    },
+};
+americanAddress.area.country.toUpperCase();

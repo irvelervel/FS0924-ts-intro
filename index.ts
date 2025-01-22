@@ -76,7 +76,7 @@ sumOfTwoNumberInTypeScript(5, 6) // 11
 
 // TYPE UNION
 let stringOrNumber: string | number = 'stefano'
-let stringOrNumber2: string | number = 100
+let stringOrNumber2: string | number = 101
 
 // TYPE ALIAS
 type MySpecialType = string | number // definizione di TIPO personalizzato in PascalCase
@@ -161,6 +161,7 @@ interface Pet {
   breed: string
   age: number
   skills: string[]
+  numberOfPaws?: number
 }
 
 let pet1: Pet = {
@@ -168,6 +169,7 @@ let pet1: Pet = {
   breed: 'Labrador',
   age: 5,
   skills: ['barking', 'playing', 'sleeping'],
+  numberOfPaws: 4,
 }
 
 // se volessi riutilizzare la struttura di pet1 per creare altri pets "in serie"?
@@ -176,5 +178,124 @@ let pet2: Pet = {
   breed: 'European',
   age: 7,
   skills: ['asking-for-food', 'playing', 'destroying', 'judging'],
-  // numberOfPaws: 4
+  numberOfPaws: 4,
 }
+
+let pet3: Pet = {
+  species: 'Snake',
+  breed: 'Copperhead',
+  age: 1,
+  skills: ['crawls', 'eat', 'sleep'],
+}
+
+// le interfacce si possono ESTENDERE
+interface HumanBeing {
+  name: string
+  age: number
+  height: number
+  eyeColor: string
+  hairColor: string
+}
+
+const mario: HumanBeing = {
+  name: 'Mario Mario',
+  age: 30,
+  height: 170,
+  eyeColor: 'brown',
+  hairColor: 'brown',
+}
+
+interface TennisPlayer extends HumanBeing {
+  favoriteHand: string
+  championshipsWon: number
+  favoriteCourt: string
+}
+
+const luigi: TennisPlayer = {
+  name: 'Luigi Mario',
+  age: 30,
+  height: 175,
+  eyeColor: 'brown',
+  hairColor: 'brown',
+  favoriteHand: 'left',
+  favoriteCourt: 'grass',
+  championshipsWon: 0,
+}
+
+const bowser: TennisPlayer = {
+  name: 'Bowser Koopa',
+  age: 35,
+  height: 185,
+  eyeColor: 'brown',
+  hairColor: 'brown',
+  favoriteHand: 'right',
+  favoriteCourt: 'clay',
+  championshipsWon: 10,
+}
+
+const yoshi: TennisPlayer = {
+  name: 'Yoshi',
+  age: 25,
+  height: 175,
+  eyeColor: 'brown',
+  hairColor: 'brown',
+  favoriteHand: 'right',
+  favoriteCourt: 'grass',
+  championshipsWon: 3,
+}
+
+const tennisPlayers: Array<TennisPlayer> = []
+// const tennisPlayers: TennisPlayer[] = []
+tennisPlayers.push(luigi, bowser, yoshi)
+console.log('TENNISPLAYERS', tennisPlayers)
+
+tennisPlayers.forEach((player) => {
+  console.log(player.favoriteHand.length.toPrecision(2))
+})
+
+const arrayOfTennisPlayersNames: string[] = tennisPlayers.map((player) => {
+  return player.name
+})
+
+// GENERICS
+// Un GENERIC è un TIPO passato come ARGOMENTO per un'INTERFACCIA
+// Lo si definisce nella stesura dell'interfaccia, e potrà essere utilizzato
+// come valore di tipo per una o più proprietà; il suo scopo è rendere
+// l'interfaccia più "generica" (più riutilizzabile!)
+
+interface USAAddress {
+  state: string
+  country: string
+}
+
+interface Address<A> {
+  street: string
+  civicNumber: number
+  city: string
+  zipCode: string
+  area: any // sto dicendo che NON CONOSCO il tipo di "area"; verrà passato
+  // all'utilizzo dell'interfaccia sotto forma di GENERIC
+}
+
+let italianAddress: Address<string> = {
+  street: 'Via Roma',
+  civicNumber: 1,
+  city: 'Paperino',
+  zipCode: '59100',
+  area: 'Italy',
+}
+
+italianAddress.area.toUpperCase()
+
+let americanAddress: Address<USAAddress> = {
+  street: 'E Hills Dr',
+  civicNumber: 2711,
+  city: 'Moore',
+  zipCode: '73160',
+  area: {
+    state: 'Oklahoma',
+    country: 'USA',
+  },
+}
+
+americanAddress.area.country.toUpperCase()
