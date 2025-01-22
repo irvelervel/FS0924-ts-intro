@@ -1,3 +1,12 @@
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
 // ogni riga di JS valida è anche una valida riga di TS!
 console.log('CIAONE TYPESCRIPT!');
 // però TS nasce con lo scopo di TIPIZZARE JS, ovvero di fornire delle definizioni
@@ -74,3 +83,62 @@ console.log(greetings('Ciao'));
 // il ? indica un parametro per cui non è sempre necessario fornire un argomento
 // è come se al parametro della funzione facessimo una TYPE UNION con il tipo 'undefined'
 // VALORI DI RITORNO
+var makeNumber = function (val) {
+    if (val === 'ciao') {
+        return 0;
+    }
+    else {
+        return parseInt(val);
+    }
+};
+var arrow = function () {
+    return 0;
+};
+makeNumber('65'); // 65
+// ARRAY
+var arrayOfNames = ['Gianluca', 'Federico', 'Alessandro'];
+var arrayOfNumbers = [5, 6, 76];
+arrayOfNumbers.push(100);
+var arrayOfStrings = __spreadArray(__spreadArray([], arrayOfNames, true), ['Stefano'], false); // 4 elementi
+// modo alternativo: Array<string> o Array<number> etc.
+var arrayOfOtherNumbers = [0, 0.5];
+var mixedArray = [10, 'Stefano'];
+mixedArray.push('Gianni');
+arrayOfNames.forEach(function (name) {
+    var firstChar = name.slice(0, 1);
+    console.log(firstChar);
+});
+arrayOfNumbers.forEach(function (n) {
+    console.log(n.toFixed(2));
+});
+// variante sugli array: la TUPLA
+var genericArray = ['Stefano', 10, 'EPICODE'];
+var z = genericArray[2]; // siamo andati a "forzare" TS e dirgli che il terzo
+// elemento dell'array era una stringa
+z.toUpperCase(); // a questo punto sono riuscito ad applicare il metodo toUpperCase()
+var tuple = [50, 'ciao', '', 0];
+tuple.push(100);
+tuple[1].toUpperCase();
+// OGGETTI
+var epicodeStaffMember1 = {
+    firstName: 'Stefano',
+    lastName: 'Casasola',
+    age: 19,
+    area: 'FVG',
+    modules: ['U1', 'U2', 'U3'],
+};
+console.log(epicodeStaffMember1.modules[0].slice(1)); // 1
+var pet1 = {
+    species: 'Doggo',
+    breed: 'Labrador',
+    age: 5,
+    skills: ['barking', 'playing', 'sleeping'],
+};
+// se volessi riutilizzare la struttura di pet1 per creare altri pets "in serie"?
+var pet2 = {
+    species: 'Cat',
+    breed: 'European',
+    age: 7,
+    skills: ['asking-for-food', 'playing', 'destroying', 'judging'],
+    // numberOfPaws: 4
+};

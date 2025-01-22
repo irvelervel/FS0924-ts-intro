@@ -97,3 +97,84 @@ console.log(greetings('Ciao'))
 // è come se al parametro della funzione facessimo una TYPE UNION con il tipo 'undefined'
 
 // VALORI DI RITORNO
+const makeNumber = function (val: string): number {
+  if (val === 'ciao') {
+    return 0
+  } else {
+    return parseInt(val)
+  }
+}
+
+const arrow = (): number => {
+  return 0
+}
+
+makeNumber('65') // 65
+
+// ARRAY
+let arrayOfNames = ['Gianluca', 'Federico', 'Alessandro']
+
+let arrayOfNumbers: number[] = [5, 6, 76]
+arrayOfNumbers.push(100)
+
+let arrayOfStrings: string[] = [...arrayOfNames, 'Stefano'] // 4 elementi
+// modo alternativo: Array<string> o Array<number> etc.
+let arrayOfOtherNumbers: Array<number> = [0, 0.5]
+let mixedArray: Array<MySpecialType> = [10, 'Stefano']
+mixedArray.push('Gianni')
+
+arrayOfNames.forEach((name) => {
+  const firstChar = name.slice(0, 1)
+  console.log(firstChar)
+})
+
+arrayOfNumbers.forEach((n) => {
+  console.log(n.toFixed(2))
+})
+
+// variante sugli array: la TUPLA
+let genericArray: (string | number)[] = ['Stefano', 10, 'EPICODE']
+
+const z = genericArray[2] as string // siamo andati a "forzare" TS e dirgli che il terzo
+// elemento dell'array era una stringa
+z.toUpperCase() // a questo punto sono riuscito ad applicare il metodo toUpperCase()
+
+let tuple: [number, string, string, number] = [50, 'ciao', '', 0]
+tuple.push(100)
+tuple[1].toUpperCase()
+
+// OGGETTI
+let epicodeStaffMember1 = {
+  firstName: 'Stefano',
+  lastName: 'Casasola',
+  age: 19,
+  area: 'FVG',
+  modules: ['U1', 'U2', 'U3'],
+}
+
+console.log(epicodeStaffMember1.modules[0].slice(1)) // 1
+
+// INTERFACCE
+// un'interfaccia è una tipo di dato specifico per un oggetto
+interface Pet {
+  species: string
+  breed: string
+  age: number
+  skills: string[]
+}
+
+let pet1: Pet = {
+  species: 'Doggo',
+  breed: 'Labrador',
+  age: 5,
+  skills: ['barking', 'playing', 'sleeping'],
+}
+
+// se volessi riutilizzare la struttura di pet1 per creare altri pets "in serie"?
+let pet2: Pet = {
+  species: 'Cat',
+  breed: 'European',
+  age: 7,
+  skills: ['asking-for-food', 'playing', 'destroying', 'judging'],
+  // numberOfPaws: 4
+}
